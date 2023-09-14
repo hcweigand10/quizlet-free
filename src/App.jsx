@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   ApolloClient,
   InMemoryCache,
@@ -7,7 +7,9 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { Outlet } from 'react-router-dom';
-import Navbar from './components/UI/Navbar';
+import { useQuery } from '@apollo/client';
+import { ME } from './utils/queries';
+import NavbarComp from './components/UI/Navbar';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -34,12 +36,21 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const [username, setUsername] = useState(null)
+
+  // const {data, loading} = useQuery(ME, {
+  //   onCompleted: () => {
+  //     console.log(data)
+  //     setUsername(data.user?.username || null)
+  //   }
+  // })
+  
 
   return (
-    <ApolloProvider client={client}>
-      <Navbar />
+    <>
+      <NavbarComp username={username}/>
       <Outlet />
-    </ApolloProvider>
+    </>
   )
 }
 

@@ -1,20 +1,25 @@
 import React, {useState} from 'react'
 import { useMutation } from '@apollo/client'
-import { LOGIN } from '../../utils/mutations'
-import auth from '../../utils/auth'
 import { Link } from 'react-router-dom'
+import Modal from '../UI/Modal'
+import { ADD_USER } from '../../utils/mutations'
 
-const Login = () => {
-  const [formState, setFormState] = useState({username: "", password: "",})
+const SignUp = () => {
+  const [signupObj, setSignUpObj] = useState({username: "", password: "", confirm: ""})
+  const [visible, setVisible] = useState(false)
 
-  const [login, { error }] = useMutation(LOGIN);
+  const [addUser, { error }] = useMutation(ADD_USER);
 
   const formSubmit = async (event) => {
     event.preventDefault();
     console.log("hi")
     try {
-      const mutationResponse = await login({
-        variables: { username: formState.username, password: formState.password },
+      if (signupObj.password !== signupObj.confirm) {
+        setVisible(true)
+        return
+      }
+      const mutationResponse = await addUser({
+        variables: { username: signupObj.username, password: signupObj.password },
       });
       const token = mutationResponse.data.login.token;
       auth.login(token)
@@ -24,10 +29,16 @@ const Login = () => {
   }
 
   const handleInputChange = (e) => {
-    setFormState({
-      ...formState,
+    setSignUpObj({
+      ...signupObj,
       [e.target.name]: e.target.value
     })
+  }
+  const modalOptions = {
+    visible,
+		setVisible,
+    title: "Oops",
+    description: "Passwords do not match"
   }
 
     return (
@@ -39,15 +50,20 @@ const Login = () => {
             <label className="font-semibold text-sm text-gray-600 pb-1 block">Username</label>
             <input type="text" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" 
             name="username"
-            value={formState.username}
+            value={signupObj.username}
             onChange={handleInputChange}/>
             <label className="font-semibold text-sm text-gray-600 pb-1 block">Password</label>
             <input type="password" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
             name="password" 
-            value={formState.password}
+            value={signupObj.password}
+            onChange={handleInputChange}/>
+            <label className="font-semibold text-sm text-gray-600 pb-1 block">Confirm Password</label>
+            <input type="password" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+            name="confirm" 
+            value={signupObj.confirm}
             onChange={handleInputChange}/>
             <button type="submit" className="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block">
-                <span className="inline-block mr-2">Login</span>
+                <span className="inline-block mr-2">Sign Up</span>
             </button>
           </form>
           <div className="p-5">
@@ -70,10 +86,11 @@ const Login = () => {
               </div>
             </div>
           </div> */}
-          <Link to="/signup">New here? Sign up instead</Link>
+          <Link to="/login">Login instead</Link>
+          <Modal options={modalOptions}></Modal>
       </div>
     </div>
     )
 }
 
-export default Login
+export default SignUp

@@ -7,7 +7,7 @@ colors.secodary = '#ACD1AF';
 const animationSpeed = 450; // miliseconds
 
 module.exports = {
-	content: ['./src/**/*.{js,jsx}'],
+	content: ["./index.html",'./src/**/*.{js,jsx}', 'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'],
 	theme: {
 		colors: colors,
 		extend: {
@@ -33,5 +33,5 @@ module.exports = {
 			// margin: "2rem"
 		}
 	},
-	plugins: [require('@tailwindcss/forms')]
+	plugins: [require('@tailwindcss/forms'), require("flowbite/plugin")]
 };
