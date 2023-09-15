@@ -5,6 +5,10 @@ export const ALL_DECKS = gql`
     allDecks {
       _id
       name
+      cardCount
+      createdBy {
+        username
+      }
     }
   }
 `;

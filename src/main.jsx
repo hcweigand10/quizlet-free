@@ -13,7 +13,7 @@ import Login from "./components/pages/Login.jsx";
 import Signup from "./components/pages/Signup.jsx";
 import Play from "./components/pages/Play.jsx";
 import Profile from "./components/pages/Profile.jsx";
-import Contact from "./components/pages/Contact.jsx";
+import About from "./components/pages/About.jsx";
 import CreateDeck from "./components/pages/CreateDeck.jsx";
 import ManageDeck from "./components/pages/ManageDeck.jsx";
 import { setContext } from '@apollo/client/link/context';
@@ -71,8 +71,8 @@ const router = createBrowserRouter([
         element: <CreateDeck />,
       },
       {
-        path: "/contact",
-        element: <Contact />,
+        path: "/about",
+        element: <About />,
       },
       {
         path: "/profile",

@@ -71,13 +71,13 @@ const NavbarComp = () => {
         ) : null}
         <Link
           className={classCondition(
-            currentPage === "/contact" ? "text-primary" : "",
+            currentPage === "/about" ? "text-primary" : "",
             styles.link
           )}
-          to="/contact"
-          onClick={() => setCurrentPage("/contact")}
+          to="/about"
+          onClick={() => setCurrentPage("/about")}
         >
-          Contact
+          About
         </Link>
       </Navbar.Collapse>
     </Navbar>

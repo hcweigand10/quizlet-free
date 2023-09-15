@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
 
-const Contact = () => {
+const About = () => {
 
     return (
         <div className='container'>
-             <h3>Contact</h3>
+             <h3>About</h3>
         </div>
     )
 }
 
-export default Contact
+export default About
