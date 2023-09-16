@@ -9,6 +9,7 @@ export const ALL_DECKS = gql`
       description
       createdBy {
         username
+        _id
       }
     }
   }

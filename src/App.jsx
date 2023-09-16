@@ -47,10 +47,10 @@ function App() {
   
 
   return (
-    <>
+    <div className='h-screen bg-slate-100'>
       <NavbarComp username={username}/>
       <Outlet />
-    </>
+    </div>
   )
 }
 

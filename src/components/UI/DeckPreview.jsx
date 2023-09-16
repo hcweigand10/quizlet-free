@@ -1,20 +1,28 @@
-import { Card, Button } from "flowbite-react"
-import { Link } from "react-router-dom"
+import { Card, Button } from "flowbite-react";
+import { Link } from "react-router-dom";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-const DeckPreview = ({name, description, user, cardCount, id}) => {
+const DeckPreview = ({ name, description, user, cardCount, id }) => {
   return (
-    <Card className="max-w-sm" >
-      <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+    <Link to={`/play/${id}`}>
+          <div className="max-w-sm bg-white hover:bg-slate-50 shadow-lg px-6 py-4 my-3">
+        <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {name}
-      </h5>
-      <p className="font-normal text-gray-700 dark:text-gray-400">
+        </h5>
+        <p className="font-normal text-gray-700 dark:text-gray-400 italic mb-1">
           {description}
-      </p>
-      <Link to={`/play/${id}`}>
-          Play Now!
-      </Link>
-    </Card>
-  )
-}
+        </p>
+        <p className="font-normal text-gray-700 dark:text-gray-400 bg-primary text-white rounded px-1 inline-block">
+          {cardCount} cards
+        </p>
+        <Link to={`/profile/${user._id}`}>
+        <p className="font-normal italic text-gray-700 dark:text-gray-400 float-right hover:text-primary inline">
+          <AccountCircleIcon/>{user.username}
+        </p>
+        </Link>
+      </div>
+    </Link>
+  );
+};
 
-export default DeckPreview
+export default DeckPreview;
