@@ -5,6 +5,7 @@ import { UPDATE_DECK, ADD_CARD } from "../../utils/mutations";
 import Loading from "../UI/Loading";
 import Modal from "../UI/Modal";
 import Button from "../UI/Button";
+import ButtonGray from "../UI/ButtonGray";
 
 const deckId = window.location.pathname.split("/")[2];
 
@@ -30,16 +31,25 @@ const ManageDeck = () => {
 
   const updateFormSubmit = async (e) => {
     e.preventDefault();
-    const res = await updateDeck({
-      variables: {
-        deckId,
-        name,
-        description,
-      },
-    });
+    try {
+      const res = await updateDeck({
+        variables: {
+          deckId,
+          name,
+          description,
+        },
+      });
+      if (res.data.updateDeck) {
+        window.location.reload()
+      }
+      
+    } catch (error) {
+      console.log(error)
+      alert(error)
+    }
   };
 
-  const updateDisabled = name === data.deck.name && description === data.deck.description
+  const updateDisabled = loading ? false : name === data.deck.name && description === data.deck.description
   const addCardDisabled = !answer && !prompt
 
   if (loading) {
@@ -86,6 +96,7 @@ const ManageDeck = () => {
             onChange={(e) => setDescription(e.target.value)}
           />
           <Button type="submit" disabled={updateDisabled}>Update</Button>
+          <ButtonGray type="button" onClick={() => setVisible(false)}>Cancel</ButtonGray>
         </form>
       </Modal>
     </div>
