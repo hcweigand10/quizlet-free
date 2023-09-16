@@ -38,7 +38,6 @@ const SignUp = () => {
     visible,
 		setVisible,
     title: "Oops",
-    description: "Passwords do not match"
   }
 
     return (
@@ -87,7 +86,7 @@ const SignUp = () => {
             </div>
           </div> */}
           <Link to="/login">Login instead</Link>
-          <Modal options={modalOptions}></Modal>
+          <Modal options={modalOptions}><p>Passwords don't match</p></Modal>
       </div>
     </div>
     )

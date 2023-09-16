@@ -32,6 +32,7 @@ module.exports = {
 			padding: '2rem'
 			// margin: "2rem"
 		}
+    
 	},
 	plugins: [require('@tailwindcss/forms'), require("flowbite/plugin")]
 };

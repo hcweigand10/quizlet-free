@@ -29,6 +29,7 @@ mutation UpdateDeck($name: String!, $description: String!, $deckId: ID!) {
   updateDeck(name: $name, description: $description, deckId: $deckId) {
     _id
     name
+    description
   }
 }
 `
