@@ -45,6 +45,16 @@ const NavbarComp = () => {
         >
           Home
         </Link>
+        <Link
+          className={classCondition(
+            currentPage === "/play" ? "text-primary" : "",
+            styles.link
+          )}
+          to="/play"
+          onClick={() => setCurrentPage("/play")}
+        >
+          Play
+        </Link>
         {auth.isLoggedIn() ? (
           <>
             <Link

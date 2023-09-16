@@ -6,6 +6,7 @@ export const ALL_DECKS = gql`
       _id
       name
       cardCount
+      description
       createdBy {
         username
       }

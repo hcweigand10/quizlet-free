@@ -8,10 +8,11 @@ import {
 } from "@apollo/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
+import Play from "./components/pages/Play.jsx";
+import Game from "./components/pages/Game.jsx";
 import Home from "./components/pages/Home.jsx";
 import Login from "./components/pages/Login.jsx";
 import Signup from "./components/pages/Signup.jsx";
-import Play from "./components/pages/Play.jsx";
 import Profile from "./components/pages/Profile.jsx";
 import About from "./components/pages/About.jsx";
 import CreateDeck from "./components/pages/CreateDeck.jsx";
@@ -83,8 +84,12 @@ const router = createBrowserRouter([
         element: <ManageDeck />,
       },
       {
-        path: "/play/:deckId",
+        path: "/play",
         element: <Play />,
+      },
+      {
+        path: "/play/:deckId",
+        element: <Game />,
       },
     ],
   },
