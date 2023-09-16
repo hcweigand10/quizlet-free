@@ -8,8 +8,10 @@ import {
 } from "@apollo/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
-import Play from "./components/pages/Play.jsx";
+import Decks from "./components/pages/Decks.jsx";
 import Game from "./components/pages/Game.jsx";
+import Learn from "./components/pages/Learn.jsx";
+import Test from "./components/pages/Test.jsx";
 import Home from "./components/pages/Home.jsx";
 import Login from "./components/pages/Login.jsx";
 import Signup from "./components/pages/Signup.jsx";
@@ -21,6 +23,7 @@ import { setContext } from '@apollo/client/link/context';
 import "./index.css";
 import SignUp from "./components/pages/Signup.jsx";
 import Error from "./components/pages/Error.jsx";
+import User from "./components/pages/User.jsx";
 
 const httpLink = createHttpLink({
   uri: "https://quizpro-back-b88671daa38f.herokuapp.com/graphql",
@@ -80,16 +83,24 @@ const router = createBrowserRouter([
         element: <Profile />,
       },
       {
+        path: "/decks",
+        element: <Decks />,
+      },
+      {
         path: "/manage/:deckId",
         element: <ManageDeck />,
       },
       {
-        path: "/play",
-        element: <Play />,
+        path: "/learn/:deckId",
+        element: <Learn />,
       },
       {
-        path: "/play/:deckId",
-        element: <Game />,
+        path: "/test/:deckId",
+        element: <Test />,
+      },
+      {
+        path: "/user/:userId",
+        element: <User />,
       },
     ],
   },

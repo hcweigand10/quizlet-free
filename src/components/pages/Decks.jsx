@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/client";
 import { ALL_DECKS } from "../../utils/queries";
 import DeckPreview from "../UI/DeckPreview";
 
-const Play = () => {
+const Decks = () => {
   const { loading, data } = useQuery(ALL_DECKS);
   console.log(data);
   return (
@@ -34,4 +34,4 @@ const Play = () => {
   );
 };
 
-export default Play;
+export default Decks;

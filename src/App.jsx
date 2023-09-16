@@ -36,7 +36,6 @@ const client = new ApolloClient({
 });
 
 function App() {
-  const [username, setUsername] = useState(null)
 
   // const {data, loading} = useQuery(ME, {
   //   onCompleted: () => {
@@ -48,7 +47,7 @@ function App() {
 
   return (
     <div className='h-screen bg-slate-100'>
-      <NavbarComp username={username}/>
+      <NavbarComp/>
       <Outlet />
     </div>
   )

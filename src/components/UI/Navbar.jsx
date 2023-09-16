@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button, Navbar } from "flowbite-react";
 import icon from "../../assets/icon.png";
 import auth from "../../utils/auth";
 import classCondition from "../../utils/classCondition";
+import {basePages, authPages} from "../../utils/pages"
 
 const styles = {
-  link: "hover:text-primary px-2 py-1 rounded"
-}
+  link: "hover:text-primary px-2 py-1 rounded",
+};
+ 
 
-const NavbarComp = () => {
+const NavbarComp = ({ username }) => {
   const [currentPage, setCurrentPage] = useState(window.location.pathname);
+  const pages = auth.isLoggedIn() ? basePages.concat(authPages) : basePages
+  
+
   return (
     <Navbar fluid rounded>
       <Navbar.Brand href="/">
@@ -21,7 +26,10 @@ const NavbarComp = () => {
       </Navbar.Brand>
       <div className="flex md:order-2">
         {auth.isLoggedIn() ? (
-          <button className="mr-2 bg-white text-red-500 px-3 py-2 rounded hover:bg-slate-100" onClick={auth.logout}>
+          <button
+            className="mr-2 bg-white text-red-500 px-3 py-2 rounded hover:bg-slate-100"
+            onClick={auth.logout}
+          >
             Logout
           </button>
         ) : (
@@ -35,60 +43,20 @@ const NavbarComp = () => {
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        <Link
+        {pages.map((page,index) => (
+          <Link
           className={classCondition(
-            currentPage === "/" ? "text-primary" : "",
+            currentPage === page.path ? "text-primary" : "",
             styles.link
           )}
-          to="/"
-          onClick={() => setCurrentPage("/")}
+          key={index}
+          to={page.path}
+          onClick={() => setCurrentPage(page.path)}
         >
-          Home
-        </Link>
-        <Link
-          className={classCondition(
-            currentPage === "/play" ? "text-primary" : "",
-            styles.link
-          )}
-          to="/play"
-          onClick={() => setCurrentPage("/play")}
-        >
-          Play
-        </Link>
-        {auth.isLoggedIn() ? (
-          <>
-            <Link
-              className={classCondition(
-                currentPage === "/profile" ? "text-primary" : "",
-                styles.link
-              )}
-              to="/profile"
-              onClick={() => setCurrentPage("/profile")}
-            >
-              Profile
-            </Link>
-            <Link
-              className={classCondition(
-                currentPage === "/create" ? "text-primary" : "",
-                styles.link
-              )}
-              to="/create"
-              onClick={() => setCurrentPage("/create")}
-            >
-              Create a Deck
-            </Link>
-          </>
-        ) : null}
-        <Link
-          className={classCondition(
-            currentPage === "/about" ? "text-primary" : "",
-            styles.link
-          )}
-          to="/about"
-          onClick={() => setCurrentPage("/about")}
-        >
-          About
-        </Link>
+          {page.name}
+          </Link>
+        ))}
+        
       </Navbar.Collapse>
     </Navbar>
   );

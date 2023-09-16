@@ -32,7 +32,10 @@ query Profile($userId: ID!) {
       username
     }
     decks {
+      _id
       name
+      cardCount
+      description
     }
   }
 }
