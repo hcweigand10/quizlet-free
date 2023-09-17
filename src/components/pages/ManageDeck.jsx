@@ -49,7 +49,7 @@ const ManageDeck = () => {
     }
   };
 
-  const updateDisabled = loading ? false : name === data.deck.name && description === data.deck.description
+  const updateDisabled = loading ? false : name === data?.deck?.name && description === data?.deck?.description
   const addCardDisabled = !answer && !prompt
 
   if (loading) {
