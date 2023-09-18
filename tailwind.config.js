@@ -29,7 +29,8 @@ module.exports = {
 			}
 		},
 		container: {
-			padding: '2rem'
+			padding: '2rem',
+      center: true,
 			// margin: "2rem"
 		}
     
