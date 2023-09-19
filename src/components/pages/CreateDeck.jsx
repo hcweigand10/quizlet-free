@@ -35,7 +35,7 @@ const CreateDeck = () => {
 
   return (
     <div className="container">
-      <h3>Create Deck</h3>
+      <h1>Create Deck</h1>
       <form onSubmit={createDeck}>
         <div className="mb-4">
           <label

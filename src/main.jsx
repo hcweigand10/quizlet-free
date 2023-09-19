@@ -24,6 +24,7 @@ import "./index.css";
 import SignUp from "./components/pages/Signup.jsx";
 import Error from "./components/pages/Error.jsx";
 import User from "./components/pages/User.jsx";
+import View from "./components/pages/View.jsx";
 
 const httpLink = createHttpLink({
   uri: "https://quizpro-back-b88671daa38f.herokuapp.com/graphql",
@@ -89,6 +90,10 @@ const router = createBrowserRouter([
       {
         path: "/manage/:deckId",
         element: <ManageDeck />,
+      },
+      {
+        path: "/view/:deckId",
+        element: <View />,
       },
       {
         path: "/learn/:deckId",

@@ -4,7 +4,7 @@ const Learn = () => {
 
     return (
         <div className='container'>
-             <h3>Learn</h3>
+             <h1>Learn</h1>
         </div>
     )
 }

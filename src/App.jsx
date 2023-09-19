@@ -43,6 +43,8 @@ function App() {
   //     setUsername(data.user?.username || null)
   //   }
   // })
+
+  document.title = "Quiz Quo Pro | " + window.location.pathname.split("/")[1].toUpperCase()
   
 
   return (

@@ -4,7 +4,7 @@ const User = () => {
 
     return (
         <div className='container'>
-             <h3>User</h3>
+             <h1>User</h1>
         </div>
     )
 }

@@ -2,11 +2,12 @@ import { Card, Button } from "flowbite-react";
 import { Link } from "react-router-dom";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EditIcon from '@mui/icons-material/Edit';
+import UserPopover from "./UserPopover";
 
 const DeckPreview = ({ name, description, user, cardCount, id }) => {
   return (
-    <Link to={`/learn/${id}`}>
-          <div className="max-w-sm bg-white hover:bg-slate-50 shadow-lg px-6 py-4 my-3">
+    <a href={`/view/${id}`} className="max-w-sm block">
+          <div className="max-w-sm bg-white hover:bg-slate-50 shadow-lg px-6 py-4 my-3 rounded">
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {name}
         </h5>
@@ -16,13 +17,12 @@ const DeckPreview = ({ name, description, user, cardCount, id }) => {
         <p className="font-normal text-gray-700 dark:text-gray-400 bg-primary text-white rounded px-1 inline-block">
           {cardCount} cards
         </p>
-        <Link to={`/profile/${user._id}`}>
-        <p className="font-normal italic text-gray-700 dark:text-gray-400 float-right hover:text-primary inline">
-          <AccountCircleIcon/>{user.username}
-        </p>
-        </Link>
+        <div className="float-right">
+
+        <UserPopover id={user._id}/>
+        </div>
       </div>
-    </Link>
+    </a>
   );
 };
 

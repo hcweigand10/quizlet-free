@@ -24,7 +24,7 @@ const Profile = () => {
 
     return (
         <div className='container'>
-             <h3>Hello, {username}!</h3>
+             <h1>Hello, {username}!</h1>
              <h2>Your decks:</h2>
              <div>
               {data.profile.decks.map((deck) => {

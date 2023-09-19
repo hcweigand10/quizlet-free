@@ -33,28 +33,28 @@ const NavbarComp = ({ username }) => {
             Logout
           </button>
         ) : (
-          <Link
+          <a
             className="mr-2 bg-primary text-white rounded px-3 py-2 font-semibold"
-            to="/login"
+            href="/login"
           >
             Login
-          </Link>
+          </a>
         )}
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
         {pages.map((page,index) => (
-          <Link
+          <a
           className={classCondition(
             currentPage === page.path ? "text-primary" : "",
-            styles.link
+            "py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:hover:bg-transparent md:dark:hover:bg-transparent md:dark:hover:text-white hover:text-primary"
           )}
           key={index}
-          to={page.path}
-          onClick={() => setCurrentPage(page.path)}
+          href={page.path}
+          // onClick={() => setCurrentPage(page.path)}
         >
           {page.name}
-          </Link>
+          </a>
         ))}
         
       </Navbar.Collapse>

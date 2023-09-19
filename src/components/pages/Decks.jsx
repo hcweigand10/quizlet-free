@@ -11,7 +11,7 @@ const Decks = () => {
   return (
 
     <div className="container">
-      <h3 className="">All Decks</h3>
+      <h1 className="">All Decks</h1>
       {loading ? (
         <Loading />
         ) : (

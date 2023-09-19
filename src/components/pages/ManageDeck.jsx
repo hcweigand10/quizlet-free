@@ -174,11 +174,10 @@ const ManageDeck = () => {
           <label className="font-semibold text-sm text-gray-600 pb-1 block">
             Answer
           </label>
-          <textarea
+          <input
             type="text"
             className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
             name="answer"
-            rows={2}
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
           />
