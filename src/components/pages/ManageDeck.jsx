@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import React, { useState, useEffect } from "react";
 import { DECK } from "../../utils/queries";
-import { UPDATE_DECK, ADD_CARD, REMOVE_CARD } from "../../utils/mutations";
+import { UPDATE_DECK, ADD_CARD, REMOVE_CARD, REMOVE_DECK } from "../../utils/mutations";
 import Loading from "../UI/Loading";
 import Modal from "../UI/Modal";
 import Button from "../UI/Button";
@@ -35,6 +35,7 @@ const ManageDeck = () => {
   const [updateDeck, { error: updateError }] = useMutation(UPDATE_DECK);
   const [addCard, { error: addCardError }] = useMutation(ADD_CARD);
   const [removeCard, { error: removeCardError }] = useMutation(REMOVE_CARD);
+  const [removeDeck, { error: removeDeckError }] = useMutation(REMOVE_DECK);
 
   const modalOptions = {
     visible,
@@ -96,6 +97,21 @@ const ManageDeck = () => {
     }
   };
 
+  const deleteDeckSubmit = async () => {
+    try {
+      if (confirm("Are you sure you'd like to delete this deck?")) {
+        const res = await removeDeck({
+          variables: {
+            deckId
+          }
+        })
+        if (res.data.removeDeck) window.location.assign("/profile")
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  } 
+
   const updateDisabled = loading
     ? false
     : name === data?.deck?.name && description === data?.deck?.description;
@@ -112,7 +128,7 @@ const ManageDeck = () => {
         {/* add/edit cards */}
         <div className="col-span-1">
           <h2 className="text-xl font-bold mb-3">Details</h2>
-          <form onSubmit={updateFormSubmit}>
+          <form onSubmit={updateFormSubmit} className="mb-5">
             <label className="font-semibold text-sm text-gray-600 pb-1 block">
               Name
             </label>
@@ -138,6 +154,7 @@ const ManageDeck = () => {
               Update
             </Button>
           </form>
+          <ButtonDanger onClick={deleteDeckSubmit}>Delete</ButtonDanger>
         </div>
         <div className="col-span-1 md:col-span-2">
           <h2 className="text-xl font-bold mb-3">Cards</h2>
