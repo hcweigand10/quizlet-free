@@ -27,17 +27,6 @@ const View = () => {
     return <Loading />;
   }
 
-  const addScoreSubmit = async () => {
-    const res = await addScore({
-      variables: {
-        userId,
-        score: 23,
-        type: "test",
-        deckId,
-      },
-    });
-  };
-
   const scores = [...deck?.scores]
     .sort((a, b) => a.score - b.score)
     .slice(0, 5)
@@ -53,7 +42,7 @@ const View = () => {
           <div className="flex items-center">
             <span className="font-bold text-gray-900">{index + 1}</span>
             <div className="ml-3">
-              <p className="text-gray-900 text-lg">{score.user.username}</p>
+              <p className="text-gray-900 text-lg italic">{score.user.username}</p>
               <p className="text-gray-500">Time: {score.score}</p>
             </div>
           </div>
@@ -101,9 +90,9 @@ const View = () => {
           <h2 className="text-xl mb-2">Cards</h2>
           {deck.cards.map((card, index) => {
             return (
-              <div className="bg-white p-1 my-1" key={index}>
-                <h3>
-                  <span className="italic text-slate-500">{card.prompt}</span> |{" "}
+              <div className="bg-white p-2 my-1 rounded" key={index}>
+                <h2 className="italic text-slate-500 text-md">{card.prompt}</h2>
+                <h3 className="text-xl">
                   {card.answer}
                 </h3>
               </div>
