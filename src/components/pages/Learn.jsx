@@ -8,6 +8,7 @@ const Learn = () => {
   const [levelTwo, setLevelTwo] = useState([]);
   const [levelThree, setLevelThree] = useState([]);
   const [current, setCurrent] = useState({});
+  const [guess, setGuess] = useState("");
 
   const deckId = window.location.pathname.split("/")[2];
 
@@ -32,6 +33,12 @@ const Learn = () => {
     return result;
   }
 
+  const check = () => {};
+
+  const handleInputChange = (e) => {
+    setGuess(e.target.value);
+  };
+
   return (
     <div className="container grid gird-cols-1 md:grid-cols-4">
       <h1>Learn</h1>
@@ -42,7 +49,19 @@ const Learn = () => {
         <h4>Locked down: {levelThree.length}</h4>
       </div>
       <div className="col-span-1 md:col-span-3">
-        <h2>Propmt: {current.prompt}</h2>
+        <h2>Prompt: {current.prompt}</h2>
+        <form onSubmit={check}>
+          <label className="font-semibold text-sm text-gray-600 pb-1 block">
+            Username
+          </label>
+          <input
+            type="text"
+            className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+            name="guess"
+            value={guess}
+            onChange={handleInputChange}
+          />
+        </form>
       </div>
     </div>
   );
