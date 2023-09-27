@@ -4,7 +4,7 @@ const getToken = () => localStorage.getItem("token");
 
 const auth = {
   getProfile: () => {
-    return decode(getToken()); // {data: {username, _id}}
+    return decode(getToken()) || undefined; // {data: {username, _id}}
   },
   isLoggedIn: () => {
     try {

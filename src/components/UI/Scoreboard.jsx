@@ -4,7 +4,7 @@ import auth from '../../utils/auth';
 
 const Scoreboard = ({deck}) => {
 
-  const {username} = auth.getProfile().data
+  const username = auth.isLoggedIn() ? auth.getProfile().data.username : null
 
   const scores = [...deck?.scores]
   .sort((a, b) => a.score - b.score)
