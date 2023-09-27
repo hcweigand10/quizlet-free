@@ -9,6 +9,7 @@ import auth from "../../utils/auth";
 import classCondition from "../../utils/classCondition";
 import UserPopover from "../UI/UserPopover";
 import { Link } from "react-router-dom";
+import Scoreboard from "../UI/Scoreboard";
 
 const View = () => {
   const deckId = window.location.pathname.split("/")[2];
@@ -23,29 +24,6 @@ const View = () => {
   if (loading) {
     return <Loading />;
   }
-  
-  const scores = [...deck?.scores]
-  .sort((a, b) => a.score - b.score)
-  .slice(0, 5)
-  .map((score, index) => {
-    return (
-      <li
-      className={classCondition(
-        index % 2 === 1 ? "bg-slate-50" : "",
-        "px-6 py-4"
-        )}
-        key={index}
-        >
-          <div className="flex items-center">
-            <span className="font-bold text-gray-900">{index + 1}</span>
-            <div className="ml-3">
-              <p className="text-gray-900 text-lg italic">{score.user.username}</p>
-              <p className="text-gray-500">Time: {score.score}</p>
-            </div>
-          </div>
-        </li>
-      );
-    });
 
   return (
     <div className="container max-w-6xl">
@@ -89,25 +67,15 @@ const View = () => {
             return (
               <div className="bg-white p-2 my-1 rounded" key={index}>
                 <h2 className="italic text-slate-500 text-md">{card.prompt}</h2>
-                <h3 className="text-xl">
-                  {card.answer}
-                </h3>
+                <h3 className="text-xl">{card.answer}</h3>
               </div>
             );
           })}
         </div>
         <div className="col-span-1">
-          <h2 className="text-xl mb-2">Highscores</h2>
-          <div className="">
-            <div className="bg-white shadow overflow-hidden sm:rounded-lg">
-              <div className="border-t border-gray-200">
-                <ol className="divide-y divide-gray-200">{scores}</ol>
-              </div>
-            </div>
-          </div>
+          <Scoreboard deck={deck} />
         </div>
       </div>
-      
     </div>
   );
 };

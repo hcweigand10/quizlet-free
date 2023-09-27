@@ -1,6 +1,6 @@
 export const secondsToTime = (time) => {
-  const minutes = time % 60
-  const seconds = time - (minutes*60)
+  const minutes = Math.floor(time / 60)
+  const seconds = time % 60
   const result = `${minutes}:${seconds > 10 ? seconds : "0" + seconds.toString()}`
   return result
 }

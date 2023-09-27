@@ -93,10 +93,6 @@ const Learn = () => {
     setVisible(true);
   };
 
-  const handleInputChange = (e) => {
-    setGuess(e.target.value);
-  };
-
   const nextCard = () => {
     setGuess("");
     // if still unseen cards, use those
@@ -210,7 +206,7 @@ const Learn = () => {
                 className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-80"
                 name="guess"
                 value={guess}
-                onChange={handleInputChange}
+                onChange={(e) => setGuess(e.target.value)}
               />
             </form>
           </div>
