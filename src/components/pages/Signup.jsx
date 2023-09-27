@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { useMutation } from '@apollo/client'
 import { Link } from 'react-router-dom'
 import Modal from '../UI/Modal'
+import auth from '../../utils/auth'
 import { ADD_USER } from '../../utils/mutations'
 
 const SignUp = () => {
@@ -12,7 +13,6 @@ const SignUp = () => {
 
   const formSubmit = async (event) => {
     event.preventDefault();
-    console.log("hi")
     try {
       if (signupObj.password !== signupObj.confirm) {
         setVisible(true)
@@ -21,7 +21,8 @@ const SignUp = () => {
       const mutationResponse = await addUser({
         variables: { username: signupObj.username, password: signupObj.password },
       });
-      const token = mutationResponse.data.login.token;
+      console.log(mutationResponse)
+      const token = mutationResponse.data.addUser.token;
       auth.login(token)
     } catch (e) {
       console.log(e);

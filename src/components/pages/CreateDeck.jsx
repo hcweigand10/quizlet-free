@@ -26,7 +26,7 @@ const CreateDeck = () => {
         },
       });
       if (response.data.addDeck._id) {
-        window.location.assign("/")
+        window.location.assign(`/manage/${response.data.addDeck._id}`)
       }
     } catch (error) {
       console.log(error);

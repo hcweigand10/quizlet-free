@@ -17,6 +17,7 @@ const Test = () => {
   const [correct, setCorrect] = useState(0);
   const [cardsLeft, setCardsLeft] = useState([]);
   const [guess, setGuess] = useState("");
+  const [status, setStatus] = useState("")
   const [current, setCurrent] = useState({ prompt: "", answer: "" });
 
   const deckId = window.location.pathname.split("/")[2];
@@ -82,6 +83,10 @@ const Test = () => {
   const wrongAnswer = () => {
     setTime(time + 5);
     setCardsLeft([...cardsLeft.slice(1), current]);
+    setStatus("Wrong!")
+    const wrongAlert = setTimeout(() => {
+      setStatus("")
+    }, 1000);
   };
 
   const nextCard = () => {
@@ -186,6 +191,7 @@ const Test = () => {
           </>
         )}
       </div>
+      <h2 className="text-center mt-5 text-xl text-red-800">{status}</h2>
     </div>
   );
 };
