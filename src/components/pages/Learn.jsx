@@ -4,6 +4,8 @@ import { DECK } from "../../utils/queries";
 import Modal from "../UI/Modal";
 import Button from "../UI/Button";
 import Loading from "../UI/Loading";
+import EndLearn from "../UI/EndLearn";
+import { checkAnswer, shuffleArray } from "../../utils/helpers";
 
 const Learn = () => {
   const [unseen, setUnseen] = useState([]);
@@ -24,6 +26,8 @@ const Learn = () => {
 
   const { data, loading } = useQuery(DECK, { variables: { deckId } });
 
+  const deck = data?.deck;
+
   useEffect(() => {
     if (data) {
       const shufffled = shuffleArray(data.deck.cards);
@@ -34,31 +38,18 @@ const Learn = () => {
 
   useEffect(() => {
     if (levelThree.length === data?.deck.cards.length) {
-      setRounds(rounds-1)
       endGame();
     }
   }, [levelThree]);
 
   useEffect(() => {
-    nextCard()
-  }, [rounds])
-  
+    nextCard();
+  }, [rounds]);
 
-  function shuffleArray(array) {
-    const result = [...array];
-    for (var i = result.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = result[i];
-      result[i] = result[j];
-      result[j] = temp;
-    }
-    return result;
-  }
 
   const check = (e) => {
     e.preventDefault();
-    const correct = current.answer.split("(")[0].trim().toLowerCase();
-    if (guess.toLowerCase() === correct) {
+    if (checkAnswer(guess, current.answer)) {
       correctAnswer();
     } else {
       wrongAnswer();
@@ -80,7 +71,7 @@ const Learn = () => {
       setLevelThree([...levelThree, current]);
     }
     setCorrect(correct + 1);
-    setRounds(rounds+1)
+    setRounds(rounds + 1);
     setTimeout(() => {
       setStatus("");
     }, 1000);
@@ -94,6 +85,9 @@ const Learn = () => {
     } else if (current.level === "unseen") {
       setUnseen(unseen.slice(1));
       setLevelOne([...levelOne, current]);
+    } else {
+      // if miss a level one, move to back
+      setLevelOne([...levelOne.slice(1), current]);
     }
     //remove from previous level
     setVisible(true);
@@ -115,9 +109,8 @@ const Learn = () => {
       if (current.prompt === levelOne[0].prompt) {
         setCurrent({ ...levelTwo[0], level: "levelTwo" });
       } else if (current.prompt === levelTwo[0].prompt) {
-        setCurrent({ ...levelOne[0], level: "levelTwo" });
-      }
-      else if (flip) {
+        setCurrent({ ...levelOne[0], level: "levelOne" });
+      } else if (flip) {
         setCurrent({ ...levelOne[0], level: "levelOne" });
         // setLevelOne(levelOne.slice(1));
       } else {
@@ -142,7 +135,7 @@ const Learn = () => {
     if (fix === correct) {
       setVisible(false);
       setFix("");
-      setRounds(rounds+1)
+      setRounds(rounds + 1);
     } else {
       setFixStatus("Not quite... check your spelling");
     }
@@ -166,20 +159,45 @@ const Learn = () => {
   }
 
   return (
-    <div className="container ">
-      <h1>Learn</h1>
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-6 max-w-4xl mx-auto">
-        <div className="col-span-1 bg-white rounded p-5">
-          <h4>Unseen: {unseen.length}</h4>
-          <h4>Still learning: {levelOne.length}</h4>
-          <h4>Almost: {levelTwo.length}</h4>
-          <h4>Locked down: {levelThree.length}</h4>
+    <div className="container max-w-6xl">
+      <div className="mb-7">
+        <h4 className="text-slate-500 mb-5">
+          <a className="underline text-slate-700" href="/decks">
+            All Decks
+          </a>{" "}
+          |{" "}
+          <a className="underline text-slate-700" href={`/view/${deckId}`}>
+            {deck.name}
+          </a>{" "}
+          | <span className="italic">Learn</span>
+        </h4>
+        <h1 className="">{deck.name}</h1>
+      </div>
+      {gameOver ? (
+        <div className="bg-white w-full p-5 rounded">
+
+        <EndLearn rounds={rounds} correct={correct} />
         </div>
-        {gameOver ? (
-          <div className="col-span-1 md:col-span-3 bg-white rounded p-5">
-            Nicely done!
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mx-auto">
+          <div className="col-span-1 bg-white rounded p-5">
+            <h4 className="text-md text-slate-500">Unseen</h4>
+            <h3 className="text-xl text-slate-900 font-bold">
+              {unseen.length}
+            </h3>
+            <h4 className="text-md text-slate-500">Still Learning</h4>
+            <h3 className="text-xl text-slate-900 font-bold">
+              {levelOne.length}
+            </h3>
+            <h4 className="text-md text-slate-500">Almost</h4>
+            <h3 className="text-xl text-slate-900 font-bold">
+              {levelTwo.length}
+            </h3>
+            <h4 className="text-md text-slate-500">Got it</h4>
+            <h3 className="text-xl text-slate-900 font-bold">
+              {levelThree.length}
+            </h3>
           </div>
-        ) : (
           <div className="col-span-1 md:col-span-3 bg-white rounded p-5">
             <h4 className="text-slate-600">Prompt</h4>
             <h2 className="text-3xl">{current.prompt}</h2>
@@ -196,12 +214,8 @@ const Learn = () => {
               />
             </form>
           </div>
-        )}
-        <div className="col-span-1 bg-white rounded p-5">
-          <h4>Round: {rounds + 1}</h4>
-          <h4>Percentage: {rounds ? (100 * correct) / rounds : "-"}%</h4>
         </div>
-      </div>
+      )}
       <h3 className="text-green-800 text-center text-2xl">{status}</h3>
       <Modal options={modalOptions}>
         <h2>

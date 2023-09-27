@@ -17,27 +17,24 @@ const View = () => {
       deckId,
     },
   });
-  const userId = auth.getProfile().data._id;
 
-  const [addScore, { error }] = useMutation(ADD_SCORE);
   const deck = data?.deck;
-  console.log(data);
 
   if (loading) {
     return <Loading />;
   }
-
+  
   const scores = [...deck?.scores]
-    .sort((a, b) => a.score - b.score)
-    .slice(0, 5)
-    .map((score, index) => {
-      return (
-        <li
-          className={classCondition(
-            index % 2 === 1 ? "bg-slate-50" : "",
-            "px-6 py-4"
-          )}
-          key={index}
+  .sort((a, b) => a.score - b.score)
+  .slice(0, 5)
+  .map((score, index) => {
+    return (
+      <li
+      className={classCondition(
+        index % 2 === 1 ? "bg-slate-50" : "",
+        "px-6 py-4"
+        )}
+        key={index}
         >
           <div className="flex items-center">
             <span className="font-bold text-gray-900">{index + 1}</span>
@@ -61,22 +58,22 @@ const View = () => {
               </a>{" "}
               | <span className="italic">{deck.name}</span>
             </h4>
-            <h2 className="text-3xl">{deck.name}</h2>
+            <h1 className="">{deck.name}</h1>
             <h3 className="text-md text-slate-500">{deck.description}</h3>
           </div>
           <div className="my-5">
-            <Link
+            <a
               className="w-24 bg-purple-400 text-white rounded py-2 px-3 mr-4 font-bold text-lg hover:bg-purple-500"
-              to={`/learn/${deckId}`}
+              href={`/learn/${deckId}`}
             >
               Learn
-            </Link>
-            <Link
+            </a>
+            <a
               className="w-24 bg-rose-400 text-white rounded py-2 px-3 font-bold text-lg hover:bg-rose-500"
-              to={`/test/${deckId}`}
+              href={`/test/${deckId}`}
             >
               Test
-            </Link>
+            </a>
           </div>
         </div>
         <div className="mb-4 col-span-1 flex justify-end items-center">
@@ -110,6 +107,7 @@ const View = () => {
           </div>
         </div>
       </div>
+      
     </div>
   );
 };
