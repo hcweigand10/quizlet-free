@@ -19,6 +19,9 @@ const View = () => {
     },
   });
 
+  const username = auth.isLoggedIn() ? auth.getProfile().data.username : null
+  console.log(username)
+
   const deck = data?.deck;
 
   if (loading) {
@@ -41,17 +44,18 @@ const View = () => {
           </div>
           <div className="my-5">
             <a
-              className="w-24 bg-purple-400 text-white rounded py-2 px-3 mr-4 font-bold text-lg hover:bg-purple-500"
+              className={classCondition(username ? "hover:bg-purple-500" : "disabled-link opacity-60", "w-24 bg-purple-400 text-white rounded py-2 px-3 mr-4 font-bold text-lg")}
               href={`/learn/${deckId}`}
             >
               Learn
             </a>
             <a
-              className="w-24 bg-rose-400 text-white rounded py-2 px-3 font-bold text-lg hover:bg-rose-500"
+              className={classCondition(username ? "hover:bg-rose-500" : "disabled-link opacity-60", "w-24 bg-rose-400 text-white rounded py-2 px-3 mr-4 font-bold text-lg")}
               href={`/test/${deckId}`}
             >
               Test
             </a>
+            <p className="mt-2 text-slate-500">{username ? null : "(login to learn or test!)"}</p>
           </div>
         </div>
         <div className="mb-4 col-span-1 flex justify-end items-center">

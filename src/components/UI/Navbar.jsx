@@ -5,10 +5,6 @@ import icon from "../../assets/icon.png";
 import auth from "../../utils/auth";
 import classCondition from "../../utils/classCondition";
 import {basePages, authPages} from "../../utils/pages"
-
-const styles = {
-  link: "hover:text-primary px-2 py-1 rounded",
-};
  
 
 const NavbarComp = ({ username }) => {
@@ -26,12 +22,15 @@ const NavbarComp = ({ username }) => {
       </Navbar.Brand>
       <div className="flex md:order-2">
         {auth.isLoggedIn() ? (
+          <>
+          <h2 className="my-auto">Welcome, <span className="italic font-semibold">{auth.getProfile().data.username}</span></h2>
           <button
             className="mr-2 bg-white text-red-500 px-3 py-2 rounded hover:bg-slate-100"
             onClick={auth.logout}
-          >
+            >
             Logout
           </button>
+            </>
         ) : (
           <a
             className="mr-2 bg-primary text-white rounded px-3 py-2 font-semibold"

@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import classCondition from '../../utils/classCondition';
 import auth from '../../utils/auth';
+import { secondsToTime } from '../../utils/helpers';
 
 const Scoreboard = ({deck}) => {
 
@@ -22,7 +23,7 @@ const Scoreboard = ({deck}) => {
             <span className="font-bold text-gray-900">{index + 1}</span>
             <div className="ml-3">
               <p className={classCondition(score.user.username === username ? "text-primary font-bold" : "text-gray-900", "text-lg italic")}>{score.user.username}</p>
-              <p className="text-gray-500">Time: {score.score}</p>
+              <p className="text-gray-500">Time: {secondsToTime(score.score)}</p>
             </div>
           </div>
         </li>

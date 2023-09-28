@@ -18,6 +18,7 @@ const Test = () => {
   const [cardsLeft, setCardsLeft] = useState([]);
   const [guess, setGuess] = useState("");
   const [status, setStatus] = useState("")
+  const [statusColor, setStatusColor] = useState("")
   const [current, setCurrent] = useState({ prompt: "", answer: "" });
 
   const deckId = window.location.pathname.split("/")[2];
@@ -78,14 +79,22 @@ const Test = () => {
     if (cardsLeft.length === 1) finish();
     setCorrect(correct + 1);
     setCardsLeft(cardsLeft.filter((card) => card.prompt !== current.prompt));
+    setStatus("Correct!")
+    setStatusColor("emerald")
+    const correctAlert = setTimeout(() => {
+      setStatus("")
+      setStatusColor("")
+    }, 1000);
   };
 
   const wrongAnswer = () => {
     setTime(time + 5);
     setCardsLeft([...cardsLeft.slice(1), current]);
     setStatus("Wrong!")
+    setStatusColor("red")
     const wrongAlert = setTimeout(() => {
       setStatus("")
+      setStatusColor("")
     }, 1000);
   };
 
@@ -191,7 +200,7 @@ const Test = () => {
           </>
         )}
       </div>
-      <h2 className="text-center mt-5 text-xl text-red-800">{status}</h2>
+      <h2 className={`text-center mt-5 text-xl text-${statusColor}-800`}>{status}</h2>
     </div>
   );
 };
