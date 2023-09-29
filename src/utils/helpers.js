@@ -1,9 +1,11 @@
 export const secondsToTime = (time) => {
-  const minutes = Math.floor(time / 60)
-  const seconds = time % 60
-  const result = `${minutes}:${seconds > 10 ? seconds : "0" + seconds.toString()}`
-  return result
-}
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+  const result = `${minutes}:${
+    seconds > 10 ? seconds : "0" + seconds.toString()
+  }`;
+  return result;
+};
 
 export const shuffleArray = (array) => {
   const result = [...array];
@@ -14,11 +16,14 @@ export const shuffleArray = (array) => {
     result[j] = temp;
   }
   return result;
-}
+};
 
 export const checkAnswer = (guess, answer) => {
-  const split = answer.split("(")
-    const correct = split[0].trim().toLowerCase();
-    const optional = split.length > 1 ? split[1].slice(0,-1).trim().toLowerCase() : null
-    return (guess.toLowerCase() === correct || guess.toLowerCase() === optional) 
-}
+  const split = answer.split("(");
+  const correct = split[0].replaceAll("'", "").replaceAll(".", "").trim().toLowerCase();
+  const optional =
+    split.length > 1
+      ? split[1].slice(0, -1).replaceAll("'", "").replaceAll(".", "").trim().toLowerCase()
+      : null;
+  return guess.toLowerCase() === correct || guess.toLowerCase() === optional;
+};

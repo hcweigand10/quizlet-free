@@ -2,14 +2,14 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 const Modal = ({ options, className, children }) => {
-  const { visible, setVisible, title } = options;
+  const { visible, setVisible, title, locked = false } = options;
 
   return (
     <Transition.Root show={visible} as={Fragment}>
       <Dialog
         as="div"
         className="relative z-10"
-        onClose={() => setVisible(false)}
+        onClose={() => locked ? null : setVisible(false)}
       >
         {/* Modal background */}
         <Transition.Child

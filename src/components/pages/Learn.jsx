@@ -1,11 +1,12 @@
 import { useQuery } from "@apollo/client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { DECK } from "../../utils/queries";
 import Modal from "../UI/Modal";
 import Button from "../UI/Button";
 import Loading from "../UI/Loading";
 import EndLearn from "../UI/EndLearn";
 import { checkAnswer, shuffleArray } from "../../utils/helpers";
+import ButtonGray from "../UI/ButtonGray";
 
 const Learn = () => {
   const [unseen, setUnseen] = useState([]);
@@ -21,6 +22,8 @@ const Learn = () => {
   const [rounds, setRounds] = useState(0);
   const [correct, setCorrect] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+
+  const inputRef = useRef(null)
 
   const deckId = window.location.pathname.split("/")[2];
 
@@ -45,6 +48,14 @@ const Learn = () => {
   useEffect(() => {
     nextCard();
   }, [rounds]);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      console.log(inputRef.current)
+      inputRef.current.focus()
+    }
+  }, [current, inputRef])
+  
 
 
   const check = (e) => {
@@ -78,6 +89,7 @@ const Learn = () => {
   };
 
   const wrongAnswer = () => {
+    setGuess("")
     //add to level one
     if (current.level === "levelTwo") {
       setLevelTwo(levelTwo.slice(1));
@@ -127,8 +139,7 @@ const Learn = () => {
 
   const checkFix = (e) => {
     e.preventDefault();
-    const correct = current.answer.split("(")[0].trim().toLowerCase();
-    if (fix === correct) {
+    if (checkAnswer(fix,current?.answer)) {
       setVisible(false);
       setFix("");
       setRounds(rounds + 1);
@@ -148,6 +159,7 @@ const Learn = () => {
     setVisible,
     title: "Incorrect",
     onClose: nextCard,
+    locked: true
   };
 
   if (loading) {
@@ -205,9 +217,14 @@ const Learn = () => {
                 type="text"
                 className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-80"
                 name="guess"
+                ref={inputRef}
+                autoFocus
                 value={guess}
                 onChange={(e) => setGuess(e.target.value)}
               />
+              <br />
+              <ButtonGray onClick={wrongAnswer}>I don't know</ButtonGray>
+              <Button onClick={check} type="submit">Submit</Button>
             </form>
           </div>
         </div>
@@ -237,7 +254,7 @@ const Learn = () => {
             className={"mx-2"}
             type={"submit"}
             disabled={
-              fix !== current?.answer?.split("(")[0].trim().toLowerCase()
+              visible ? !checkAnswer(fix, current?.answer) : true
             }
           >
             Got it

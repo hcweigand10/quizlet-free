@@ -43,7 +43,6 @@ const Test = () => {
   }, [ingame]);
 
   useEffect(() => {
-    console.log(cardsLeft);
     nextCard();
   }, [cardsLeft]);
 
@@ -159,7 +158,7 @@ const Test = () => {
                 the card will have to be attempted again
               </li>
               <li className="mb-2">
-                <AutoAwesome /> Casing does not matter
+                <AutoAwesome /> Casing and punctuation do NOT matter
               </li>
               <li className="mb-2">
                 <AutoAwesome /> But spelling does
@@ -192,6 +191,7 @@ const Test = () => {
                     className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-80"
                     name="guess"
                     value={guess}
+                    autoFocus
                     onChange={(e) => setGuess(e.target.value)}
                   />
                 </form>
