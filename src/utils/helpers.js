@@ -1,6 +1,12 @@
 import butterfly from "../assets/animals/butterfly.png"
 import chameleon from "../assets/animals/chameleon.png"
 import crab from "../assets/animals/crab.png"
+import dolphin from "../assets/animals/dolphin.png"
+import elephant from "../assets/animals/elephant.png"
+import jellyfish from "../assets/animals/jellyfish.png"
+import koala from "../assets/animals/koala.png"
+import turtle from "../assets/animals/turtle.png"
+import whale from "../assets/animals/whale.png"
 
 export const secondsToTime = (time) => {
   const minutes = Math.floor(time / 60);
@@ -40,5 +46,17 @@ export const getIcon = (user) => {
       return butterfly
     case "chameleon":
       return chameleon
+    case "dolphin":
+      return dolphin
+    case "elephant":
+      return elephant
+    case "jellyfish":
+      return jellyfish
+    case "koala":
+      return koala
+    case "turtle":
+      return turtle
+    case "whale":
+      return whale
   }
 }
