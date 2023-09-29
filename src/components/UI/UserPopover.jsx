@@ -26,7 +26,7 @@ const UserPopover = ({ id }) => {
               <AccountCircleIcon />
             </div>
             <div class="p-2">
-              <h3 class="text-center text-xl text-gray-900 font-medium leading-8">
+              <h3 class="text-center text-3xl text-gray-900 font-medium leading-8">
                 {user.username}
               </h3>
               <div class="text-center text-gray-400 text-xs font-semibold">

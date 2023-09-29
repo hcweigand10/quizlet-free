@@ -1,3 +1,7 @@
+import butterfly from "../assets/animals/butterfly.png"
+import chameleon from "../assets/animals/chameleon.png"
+import crab from "../assets/animals/crab.png"
+
 export const secondsToTime = (time) => {
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
@@ -27,3 +31,14 @@ export const checkAnswer = (guess, answer) => {
       : null;
   return guess.toLowerCase() === correct || guess.toLowerCase() === optional;
 };
+
+export const getIcon = (user) => {
+  switch (user.icon) {
+    case "crab": 
+      return crab
+    case "butterfly": 
+      return butterfly
+    case "chameleon":
+      return chameleon
+  }
+}

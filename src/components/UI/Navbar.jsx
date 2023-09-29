@@ -25,7 +25,7 @@ const NavbarComp = ({ username }) => {
           <>
           <h2 className="my-auto">Welcome, <span className="italic font-semibold">{auth.getProfile().data.username}</span></h2>
           <button
-            className="mr-2 bg-white text-red-500 px-3 py-2 rounded hover:bg-slate-100"
+            className="mx-2 bg-slate-100 text-red-500 px-3 py-2 rounded hover:bg-slate-200"
             onClick={auth.logout}
             >
             Logout
@@ -45,8 +45,8 @@ const NavbarComp = ({ username }) => {
         {pages.map((page,index) => (
           <a
           className={classCondition(
-            currentPage === page.path ? "text-primary" : "",
-            "py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:hover:bg-transparent md:dark:hover:bg-transparent md:dark:hover:text-white hover:text-primary"
+            currentPage === page.path ? "text-primary" : "text-slate-700 ",
+            "py-2 pr-4 pl-3 md:p-0 text-md border-b border-gray-100 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:hover:bg-transparent md:dark:hover:bg-transparent md:dark:hover:text-white hover:text-primary"
           )}
           key={index}
           href={page.path}

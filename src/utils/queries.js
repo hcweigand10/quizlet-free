@@ -30,6 +30,7 @@ query Profile($userId: ID!) {
     user {
       _id
       username
+      icon
     }
     decks {
       _id

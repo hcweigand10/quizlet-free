@@ -3,14 +3,21 @@ import { ADD_DECK } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
 import auth from "../../utils/auth";
 import classCondition from "../../utils/classCondition";
+import Unauthorized from "../UI/Unauthorized";
 
 const CreateDeck = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
   const [addDeck, { error }] = useMutation(ADD_DECK);
-  const profile = auth.getProfile();
-  console.log(profile)
+  const profile = auth.isLoggedIn() ? auth.getProfile() : null;
+  
+  if (!profile) {
+    return (
+      <Unauthorized/>
+    )
+  }
+
   const validInfo = () => {
     return name && description;
   };

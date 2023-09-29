@@ -5,6 +5,8 @@ import Loading from '../UI/Loading'
 import auth from '../../utils/auth'
 import DeckPreview from '../UI/DeckPreview'
 import DeckPreviewManage from '../UI/DeckPreviewManage'
+// import { FaBeer, FaCocktail, FaAnchor } from 'react-icons/fa'
+import { getIcon } from '../../utils/helpers'
 
 const Profile = () => {
 
@@ -15,7 +17,6 @@ const Profile = () => {
       userId: _id
     }
   })
-  console.log(data)
 
   if (loading) {
     return <Loading/>
@@ -23,7 +24,13 @@ const Profile = () => {
 
 
     return (
-        <div className='container'>
+        <div className='container max-w-6xl'>
+          <div className='grid grid-cols-8'>
+            <div className='col-span-1'>
+              <img src={getIcon(data.profile.user)} alt={data.profile.user.icon} />
+              
+            </div>
+          </div>
              <h1>Hello, {username}!</h1>
              <h2>Your decks:</h2>
              <div>
