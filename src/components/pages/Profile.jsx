@@ -7,6 +7,7 @@ import DeckPreview from '../UI/DeckPreview'
 import DeckPreviewManage from '../UI/DeckPreviewManage'
 // import { FaBeer, FaCocktail, FaAnchor } from 'react-icons/fa'
 import { getIcon } from '../../utils/helpers'
+import ProfileTabs from '../UI/ProfileTabs'
 
 const Profile = () => {
 
@@ -32,12 +33,8 @@ const Profile = () => {
             </div>
           </div>
              <h1>Hello, {username}!</h1>
-             <h2>Your decks:</h2>
-             <div>
-              {data.profile.decks.map((deck) => {
-                return <DeckPreviewManage name={deck.name} id={deck._id} description={deck.description} user={null} cardCount={deck.cardCount} edit={true}/>
-              })}
-             </div>
+             <ProfileTabs decks={data.profile.decks} scores={[]}/>
+             
         </div>
     )
 }
