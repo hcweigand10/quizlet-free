@@ -61,8 +61,8 @@ const SignUp = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
-      <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
-        <h1 className="font-bold text-center text-2xl mb-5">Your Logo</h1>
+      <div className="p-5 xs:p-0 mx-auto md:w-full md:max-w-md">
+        <h1 className="font-bold text-center text-2xl mb-5">Quiz Quo Pro</h1>
         <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
           <form className="px-5 py-7" onSubmit={formSubmit}>
             <label className="font-semibold text-sm text-gray-600 pb-1 block">
@@ -118,7 +118,7 @@ const SignUp = () => {
               <span className="inline-block mr-2">Sign Up</span>
             </button>
           </form>
-          <div className="p-5">
+          {/* <div className="p-5">
             <div className="grid grid-cols-3 gap-1">
               <button
                 type="button"
@@ -139,9 +139,9 @@ const SignUp = () => {
                 Github
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
-        <Link to="/login">Login instead</Link>
+        <h2 className="text-center underline pt-4"><Link to="/login">Already have an accound? Login instead</Link></h2>
         <Modal options={modalOptions}>
           <p>Passwords don't match</p>
         </Modal>
