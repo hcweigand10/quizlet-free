@@ -8,6 +8,7 @@ import Loading from "../UI/Loading";
 const Login = () => {
   const [formState, setFormState] = useState({ username: "", password: "" });
   const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState("")
 
   const [login, { error }] = useMutation(LOGIN);
 
@@ -22,8 +23,16 @@ const Login = () => {
         },
       });
       setLoading(false);
-      const token = mutationResponse.data.login.token;
-      auth.login(token);
+      if (mutationResponse.data.login) {
+        const token = mutationResponse.data.login.token;
+        auth.login(token);
+      } else {
+        setStatus("Incorrect credentials")
+        setFormState({username: "", password: ""})
+        setTimeout(() => {
+          setStatus("")
+        }, 2000);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -70,6 +79,7 @@ const Login = () => {
             >
               <span className="inline-block mr-2">Login</span>
             </button>
+            <h2 className="text-center text-xl italix text-red-500">{status}</h2>
           </form>
           {/* <div className="p-5">
               <div className="grid grid-cols-3 gap-1">
