@@ -1,10 +1,12 @@
 import React, {useState} from 'react'
 import { useQuery } from '@apollo/client'
-import { ALL_DECKS } from '../../utils/queries'
+import { ALL_USERS } from '../../utils/queries'
 
 const Home = () => {
 
-  const {loading, data} = useQuery(ALL_DECKS)
+  const {loading, data} = useQuery(ALL_USERS)
+  
+  if (data) console.log(data)
 
     return (
       <div className="min-h-screen flex items-center justify-center">
