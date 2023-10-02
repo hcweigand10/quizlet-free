@@ -38,6 +38,16 @@ query Profile($userId: ID!) {
       cardCount
       description
     }
+    scoreReports {
+      _id
+      name
+      scores {
+        user {
+          username
+        }
+        score
+      }
+    }
   }
 }
 `;

@@ -7,9 +7,9 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { setContext } from '@apollo/client/link/context';
 import App from "./App.jsx";
 import Decks from "./components/pages/Decks.jsx";
-import Game from "./components/pages/Game.jsx";
 import Learn from "./components/pages/Learn.jsx";
 import Test from "./components/pages/Test.jsx";
 import Home from "./components/pages/Home.jsx";
@@ -19,14 +19,13 @@ import Profile from "./components/pages/Profile.jsx";
 import About from "./components/pages/About.jsx";
 import CreateDeck from "./components/pages/CreateDeck.jsx";
 import ManageDeck from "./components/pages/ManageDeck.jsx";
-import { setContext } from '@apollo/client/link/context';
 import "./index.css";
-import SignUp from "./components/pages/Signup.jsx";
 import Error from "./components/pages/Error.jsx";
 import User from "./components/pages/User.jsx";
 import View from "./components/pages/View.jsx";
 
 const httpLink = createHttpLink({
+  // uri: "http://localhost:3001/graphql",
   uri: "https://quizpro-back-b88671daa38f.herokuapp.com/graphql",
 });
 

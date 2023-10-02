@@ -3,18 +3,22 @@ import { useMutation } from '@apollo/client'
 import { LOGIN } from '../../utils/mutations'
 import auth from '../../utils/auth'
 import { Link } from 'react-router-dom'
+import Loading from '../UI/Loading'
 
 const Login = () => {
   const [formState, setFormState] = useState({username: "", password: "",})
+  const [loading, setLoading] = useState(false)
 
   const [login, { error }] = useMutation(LOGIN);
 
   const formSubmit = async (event) => {
     event.preventDefault();
     try {
+      setLoading(true)
       const mutationResponse = await login({
         variables: { username: formState.username, password: formState.password },
       });
+      setLoading(false)
       const token = mutationResponse.data.login.token;
       auth.login(token)
     } catch (e) {
@@ -28,6 +32,8 @@ const Login = () => {
       [e.target.name]: e.target.value
     })
   }
+
+  if (loading) return <Loading />
 
     return (
       <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">

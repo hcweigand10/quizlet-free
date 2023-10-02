@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
-import { Listbox } from "@headlessui/react";
+import { Listbox, Transition } from "@headlessui/react";
 import Modal from "../UI/Modal";
+import Listybox from "../UI/Listybox";
 import auth from "../../utils/auth";
 import { ADD_USER } from "../../utils/mutations";
-
-const avatars = ["buttefly", "chameleon", "crab"];
+import { ArrowDownward } from "@mui/icons-material";
+import { getIcon, avatars } from "../../utils/helpers";
+import Loading from "../UI/Loading";
 
 const SignUp = () => {
   const [signupObj, setSignUpObj] = useState({
@@ -14,8 +16,9 @@ const SignUp = () => {
     password: "",
     confirm: "",
   });
-  const [selectedAvatar, setSelectedAvatar] = useState("crab");
+  const [selectedAvatar, setSelectedAvatar] = useState(avatars[0]);
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const [addUser, { error }] = useMutation(ADD_USER);
 
@@ -26,6 +29,7 @@ const SignUp = () => {
         setVisible(true);
         return;
       }
+      setLoading(true)
       const mutationResponse = await addUser({
         variables: {
           username: signupObj.username,
@@ -33,7 +37,7 @@ const SignUp = () => {
           icon: selectedAvatar,
         },
       });
-      console.log(mutationResponse);
+      setLoading(false)
       const token = mutationResponse.data.addUser.token;
       auth.login(token);
     } catch (e) {
@@ -52,6 +56,8 @@ const SignUp = () => {
     setVisible,
     title: "Oops",
   };
+
+  if (loading) return <Loading />
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
@@ -92,16 +98,19 @@ const SignUp = () => {
             <label className="font-semibold text-sm text-gray-600 pb-1 block">
               Pick your avatar
             </label>
-            <Listbox value={selectedAvatar} onChange={setSelectedAvatar}>
-              <Listbox.Button>{selectedAvatar}</Listbox.Button>
-              <Listbox.Options>
-                {avatars.map((avatar, index) => (
-                  <Listbox.Option key={index} value={avatar}>
-                    {avatar}
-                  </Listbox.Option>
-                ))}
-              </Listbox.Options>
-            </Listbox>
+            <div className="mb-4">
+              <Listybox
+                selected={selectedAvatar}
+                setSelected={setSelectedAvatar}
+                options={avatars}
+              />
+              <img
+                src={getIcon(selectedAvatar)}
+                alt={selectedAvatar}
+                className="h-20 w-20 mx-auto mt-3"
+              />
+            </div>
+
             <button
               type="submit"
               className="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
@@ -132,18 +141,6 @@ const SignUp = () => {
             </div>
           </div>
         </div>
-        {/* <div className="py-5">
-            <div className="grid grid-cols-2 gap-1">
-              <div className="text-center sm:text-left whitespace-nowrap">
-                <button className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 inline-block align-text-top">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                    </svg>
-                    <span className="inline-block ml-1">Back to your-app.com</span>
-                </button>
-              </div>
-            </div>
-          </div> */}
         <Link to="/login">Login instead</Link>
         <Modal options={modalOptions}>
           <p>Passwords don't match</p>

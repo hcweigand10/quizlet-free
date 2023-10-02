@@ -10,6 +10,7 @@ import { Outlet } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { ME } from './utils/queries';
 import NavbarComp from './components/UI/Navbar';
+import Footer from './components/UI/Footer';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -51,6 +52,7 @@ function App() {
     <div className='min-h-screen bg-slate-100'>
       <NavbarComp/>
       <Outlet />
+      <Footer />
     </div>
   )
 }

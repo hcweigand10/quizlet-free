@@ -12,7 +12,7 @@ export const secondsToTime = (time) => {
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
   const result = `${minutes}:${
-    seconds > 10 ? seconds : "0" + seconds.toString()
+    seconds > 9 ? seconds : "0" + seconds.toString()
   }`;
   return result;
 };
@@ -38,8 +38,10 @@ export const checkAnswer = (guess, answer) => {
   return guess.toLowerCase() === correct || guess.toLowerCase() === optional;
 };
 
-export const getIcon = (user) => {
-  switch (user.icon) {
+export const avatars = ["Butterfly", "Chameleon", "Crab", "Dolphin", "Elephant", "Jellyfish", "Koala", "Turtle", "Whale"];
+
+export const getIcon = (icon) => {
+  switch (icon.toLowerCase()) {
     case "crab": 
       return crab
     case "butterfly": 

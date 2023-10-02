@@ -4,7 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 const DeckPreviewManage = ({ name, description, cardCount, id }) => {
   return (
-          <div className="max-w-sm bg-white shadow-lg px-6 py-4 my-3">
+          <div className="max-w-sm bg-gray-100 shadow-lg px-6 py-4 my-3">
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {name}
         </h5>

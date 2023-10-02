@@ -174,8 +174,7 @@ const Test = () => {
           <>
             {gameOver ? (
               <>
-                <h2>Nice Job!</h2>
-                <h4>Your time: {time}</h4>
+                <h2 className="text-3xl mb-4">Nice Job!</h2>
                 <Scoreboard deck={deck} />
               </>
             ) : (

@@ -55,7 +55,6 @@ const CreateDeck = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="first-name"
             type="text"
-            placeholder="Capitals of South America"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -72,7 +71,6 @@ const CreateDeck = () => {
             id="last-name"
             type="text"
             rows={3}
-            placeholder="This deck is perfect for studying the capitals of Latin America..."
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
