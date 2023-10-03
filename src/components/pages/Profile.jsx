@@ -73,7 +73,7 @@ const Profile = () => {
 
   return (
     <div className="container max-w-6xl">
-      <div className="flex mb-2">
+      <div className="flex mb-3">
         <div className="w-32 pt-3">
           {updating ? (
             <div>
