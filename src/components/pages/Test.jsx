@@ -132,7 +132,7 @@ const Test = () => {
           </a>{" "}
           | <span className="italic">Test</span>
         </h4>
-        <h1 className="">{deck.name}</h1>
+        <h1 className="hidden sm:block">{deck.name}</h1>
       </div>
       <div className="bg-white p-6 rounded relative">
         <div className="absolute top-5 right-5">
@@ -180,19 +180,21 @@ const Test = () => {
             ) : (
               <div>
                 <form onSubmit={check}>
-                  <h4 className="text-slate-600">Prompt</h4>
-                  <h2 className="text-3xl">{current.prompt}</h2>
+                  <h4 className="text-slate-600 mt-10 sm:mt-0">Prompt</h4>
+                  <h2 className="text-2xl sm:text-3xl">{current.prompt}</h2>
                   <label className="text-sm text-slate-600 pb-1 block">
                     Answer here
                   </label>
                   <input
                     type="text"
-                    className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-80"
+                    className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full max-w-80"
                     name="guess"
                     value={guess}
                     autoFocus
                     onChange={(e) => setGuess(e.target.value)}
                   />
+                  <Button type="submit">Submit</Button>
+                  <p className="text-sm text-slate-400">(Or press enter)</p>
                 </form>
               </div>
             )}

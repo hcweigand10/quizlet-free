@@ -15,7 +15,7 @@ const UserPopover = ({ id }) => {
   return (
     <Popover className="relative">
       <Popover.Button><p className="font-normal italic text-gray-500 dark:text-gray-400  hover:text-primary inline">
-          <AccountCircleIcon />
+          <AccountCircleIcon className="mr-1"/>
           {user.username}
         </p></Popover.Button>
 

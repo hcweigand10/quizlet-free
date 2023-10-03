@@ -8,7 +8,7 @@ import ScoreReports from "./ScoreReports";
 const ProfileTabs = ({ decks, scoreReports, username }) => {
   const [activeTab, setActiveTab] = useState(1);
 
-  const tabs = ["Decks", "Scores"];
+  const tabs = ["My Decks", "Scores"];
   const tabContent = [
     <DeckTable decks={decks}/>,
     <ScoreReports scoreReports={scoreReports} username={username}/>,
@@ -34,7 +34,7 @@ const ProfileTabs = ({ decks, scoreReports, username }) => {
           );
         })}
       </Tab.List>
-      <Tab.Panels className="bg-white p-8 rounded">
+      <Tab.Panels className="bg-white p-4 sm:p-8 rounded">
         {tabContent.map((content, index) => (
           <Tab.Panel key={index}>{content}</Tab.Panel>
         ))}

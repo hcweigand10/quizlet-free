@@ -28,6 +28,30 @@ export const shuffleArray = (array) => {
   return result;
 };
 
+export const filterUniqueUsers = (scores) => {
+  const best = {};
+  for (const scoreObj of scores) {
+    const { score } = scoreObj;
+    const { username, icon } = scoreObj.user;
+    if (best[username]) {
+      if (best[username].score < score) {
+        best[username].score = score;
+      }
+    } else {
+      best[username] = { score: score, icon: icon };
+    }
+  }
+  const result = [];
+  for (const key in best) {
+    result.push({
+      username: key,
+      score: best[key].score,
+      icon: best[key].icon,
+    });
+  }
+  return result
+};
+
 export const checkAnswer = (guess, answer) => {
   const split = answer.split("(");
   const correct = split[0].replaceAll("'", "").replaceAll(".", "").trim().toLowerCase();

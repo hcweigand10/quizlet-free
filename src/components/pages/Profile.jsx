@@ -43,13 +43,14 @@ const Profile = () => {
     try {
       const variables = {
         userId: _id,
-        username: username,
+        username: usernameInput,
         icon: selectedAvatar,
       };
       const response = await updateUser({
         variables: variables,
       });
       if (response.data.updateUser) {
+        localStorage.setItem('token', response.data.updateUser.token);
         refetch()
         setUpdating(false)
       }
@@ -72,34 +73,37 @@ const Profile = () => {
 
   return (
     <div className="container max-w-6xl">
-      <div className="grid grid-cols-6 gap-6 pb-10">
-        <div className="col-span-1">
+      <div className="flex mb-2">
+        <div className="w-32 pt-3">
           {updating ? (
-            <>
+            <div>
               <img
                 src={getIcon(selectedAvatar)}
                 alt={selectedAvatar}
-                className="w-20 h-20 mx-auto"
+                className="w-16 h-16 mx-auto"
               />
               <Listybox
                 selected={selectedAvatar}
                 setSelected={setSelectedAvatar}
                 options={avatars}
               />
-            </>
+            </div>
           ) : (
+            <div className="flex items-center h-full">
             <img
-              className="w-20 h-20 mx-auto"
+              className="w-24 h-auto mx-auto"
               src={getIcon(data.profile.user.icon)}
               alt={data.profile.user.icon}
-            />
+              />
+              </div>
           )}
         </div>
-        <div className="col-span-5">
+        <div className="ml-5">
           {updating ? (
             <>
               <input
                 type="text"
+                className="w-full"
                 value={usernameInput}
                 onChange={(e) => setUsernameInput(e.target.value)}
               />
@@ -119,7 +123,7 @@ const Profile = () => {
             </>
           ) : (
             <>
-              <h1 className="text-slate-500">{username}</h1>
+              <h1 className="text-slate-500">{data.profile.user.username}</h1>
               <Button onClick={() => setUpdating(true)}>Edit Profile</Button>
             </>
           )}

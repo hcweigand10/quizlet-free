@@ -14,8 +14,17 @@
 }
 
 h1 {
-  font-size: 2.5em;
+  font-size: 2em;
 }
+
+@media screen and (min-width: 480px) {
+  h1 {
+    font-size: 2.5em;
+  }
+
+}
+
+
 
 .disabled-link {
   pointer-events: none;

@@ -33,12 +33,12 @@ const DeckTable = ({decks}) => {
             return (
               <tr key={_id}>
                 <td className={classes}>
-                  <h2 variant="small" color="slate" className="font-bold">
+                  <h2 variant="small" color="slate" className="font-semibold text-sm sm:text-md">
                     {name}
                   </h2>
                 </td>
                 <td className={classes}>
-                  <h2 variant="small" color="slate" className="font-normal text-slate-500">
+                  <h2 variant="small" color="slate" className="font-normal text-slate-500 text-sm sm:text-md">
                     {cardCount}
                   </h2>
                 </td>
@@ -47,7 +47,7 @@ const DeckTable = ({decks}) => {
                     href={`/manage/${_id}`}
                     variant="small"
                     color="slate"
-                    className="font-medium underline text-blue-400"
+                    className="font-medium underline text-blue-400 text-sm sm:text-md"
                   >
                     Manage
                   </a>

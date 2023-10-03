@@ -51,7 +51,6 @@ const Learn = () => {
 
   useEffect(() => {
     if (inputRef.current) {
-      console.log(inputRef.current)
       inputRef.current.focus()
     }
   }, [current, inputRef])
@@ -71,7 +70,6 @@ const Learn = () => {
     setStatus("correct!");
     // if first time seeing, move to level 3
     if (current.level === "levelOne") {
-      console.log("hello");
       setLevelOne(levelOne.slice(1));
       setLevelTwo([...levelTwo, current]);
     } else if (current.level === "levelTwo") {
@@ -168,8 +166,8 @@ const Learn = () => {
 
   return (
     <div className="container max-w-6xl">
-      <div className="mb-7">
-        <h4 className="text-slate-500 mb-5">
+      <div className="mb-3 sm:mb-7">
+        <h4 className="text-slate-500 mb-2 sm:mb-5">
           <a className="underline text-slate-700" href="/decks">
             All Decks
           </a>{" "}
@@ -179,7 +177,7 @@ const Learn = () => {
           </a>{" "}
           | <span className="italic">Learn</span>
         </h4>
-        <h1 className="">{deck.name}</h1>
+        <h1 className="hidden sm:block">{deck.name}</h1>
       </div>
       {gameOver ? (
         <div className="bg-white w-full p-5 rounded">
@@ -188,7 +186,7 @@ const Learn = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mx-auto">
-          <div className="col-span-1 bg-white rounded p-5">
+          <div className="col-span-1 bg-white rounded p-3 sm:p-5">
             <h4 className="text-md text-slate-500">Unseen</h4>
             <h3 className="text-xl text-slate-900 font-bold">
               {unseen.length}
@@ -206,7 +204,7 @@ const Learn = () => {
               {levelThree.length}
             </h3>
           </div>
-          <div className="col-span-1 md:col-span-3 bg-white rounded p-5">
+          <div className="col-span-1 md:col-span-3 bg-white rounded p-3 sm:p-5">
             <h4 className="text-slate-600">Prompt</h4>
             <h2 className="text-3xl">{current.prompt}</h2>
             <form className="mt-5" onSubmit={check}>
@@ -215,7 +213,7 @@ const Learn = () => {
               </label>
               <input
                 type="text"
-                className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-80"
+                className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full max-w-80"
                 name="guess"
                 ref={inputRef}
                 autoFocus

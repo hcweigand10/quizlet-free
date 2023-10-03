@@ -19,8 +19,7 @@ const View = () => {
     },
   });
 
-  const username = auth.isLoggedIn() ? auth.getProfile().data.username : null
-  console.log(username)
+  const username = auth.isLoggedIn() ? auth.getProfile().data.username : null;
 
   const deck = data?.deck;
 
@@ -44,27 +43,38 @@ const View = () => {
           </div>
           <div className="my-5">
             <a
-              className={classCondition(username ? "hover:bg-purple-500" : "disabled-link opacity-60", "w-24 bg-purple-400 text-white rounded py-2 px-3 mr-4 font-bold text-lg")}
+              className={classCondition(
+                username ? "hover:bg-purple-500" : "disabled-link opacity-60",
+                "w-24 bg-purple-400 text-white rounded py-2 px-3 mr-4 font-bold text-lg"
+              )}
               href={`/learn/${deckId}`}
             >
               Learn
             </a>
             <a
-              className={classCondition(username ? "hover:bg-rose-500" : "disabled-link opacity-60", "w-24 bg-rose-400 text-white rounded py-2 px-3 mr-4 font-bold text-lg")}
+              className={classCondition(
+                username ? "hover:bg-rose-500" : "disabled-link opacity-60",
+                "w-24 bg-rose-400 text-white rounded py-2 px-3 mr-4 font-bold text-lg"
+              )}
               href={`/test/${deckId}`}
             >
               Test
             </a>
-            <p className="mt-2 text-slate-500">{username ? null : "(login to learn or test!)"}</p>
+            <p className="mt-2 text-slate-500">
+              {username ? null : "(login to learn or test!)"}
+            </p>
           </div>
         </div>
-        <div className="mb-4 col-span-1 flex justify-end items-center">
+        <div className="mb-4 col-span-1 flex sm:justify-end items-center">
           <h4 className="">
             Created By <UserPopover id={deck.createdBy._id} />
           </h4>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-12">
+        <div className="col-span-1 mb-6">
+          <Scoreboard deck={deck} />
+        </div>
         <div className="col-span-1">
           <h2 className="text-xl mb-2">Cards</h2>
           {deck.cards.map((card, index) => {
@@ -75,9 +85,6 @@ const View = () => {
               </div>
             );
           })}
-        </div>
-        <div className="col-span-1">
-          <Scoreboard deck={deck} />
         </div>
       </div>
     </div>

@@ -86,6 +86,7 @@ query Deck($deckId: ID!) {
       type
       user {
         username
+        icon
       }
     }
   }

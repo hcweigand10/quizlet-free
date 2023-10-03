@@ -1,21 +1,22 @@
 import React, { useState } from "react";
-import { secondsToTime } from "../../utils/helpers";
+import { filterUniqueUsers, secondsToTime } from "../../utils/helpers";
 
 const ScoreReports = ({ scoreReports, username }) => {
 
   const headers = ["Deck", "Time", "Rank", "Action"];
 
   const ranks = scoreReports.map((deck) => {
-    const ranked = [...deck.scores].sort((a, b) => a.score - b.score);
-    const rank = ranked.findIndex((e) => e.user.username === username) + 1;
-    return { deck: deck.name, total: deck.scores.length, rank, score: deck.scores[rank-1].score, _id: deck._id };
+    const unique = filterUniqueUsers(deck.scores)
+    const ranked = unique.sort((a, b) => a.score - b.score);
+    const rank = ranked.findIndex((e) => e.username === username) + 1;
+    return { deck: deck.name, total: unique.length, rank, score: unique[rank-1].score, _id: deck._id };
   });
 
 
 
   return (
-    <div className="">
-      <table className="w-full min-w-max table-auto text-left">
+    <div className="relative overflow-x-auto">
+      <table className="w-full min-w-max table-auto text-left bg-white">
         <thead>
           <tr>
             {headers.map((head) => (
@@ -42,17 +43,17 @@ const ScoreReports = ({ scoreReports, username }) => {
             return (
               <tr key={_id}>
                 <td className={classes}>
-                  <h2 variant="small" color="slate" className="font-bold">
+                  <h2 variant="small" color="slate" className="font-semibold text-sm sm:text-md">
                     {deck}
                   </h2>
                 </td>
                 <td className={classes}>
-                  <h2 variant="small" color="slate" className="font-bold">
+                  <h2 variant="small" color="slate" className="font-semibold text-sm sm:text-md">
                     {secondsToTime(score)}
                   </h2>
                 </td>
                 <td className={classes}>
-                  <h2 variant="small" color="slate" className="font-normal text-slate-500">
+                  <h2 variant="small" color="slate" className="font-normal text-slate-500 text-sm sm:text-md">
                     <span className="font-bold text-slate-700">{rank}</span> out of <span className="font-bold text-slate-700">{total}</span>
                   </h2>
                 </td>
@@ -61,7 +62,7 @@ const ScoreReports = ({ scoreReports, username }) => {
                     href={`/view/${_id}`}
                     variant="small"
                     color="slate"
-                    className="font-medium underline text-blue-400"
+                    className="font-medium underline text-blue-400 text-sm sm:text-md"
                   >
                     Play again
                   </a>
