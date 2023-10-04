@@ -59,7 +59,7 @@ export const checkAnswer = (guess, answer) => {
     split.length > 1
       ? split[1].slice(0, -1).replaceAll("'", "").replaceAll(".", "").trim().toLowerCase()
       : null;
-  return guess.toLowerCase() === correct || guess.toLowerCase() === optional;
+  return guess.toLowerCase().trim() === correct || guess.toLowerCase().trim() === optional;
 };
 
 export const avatars = ["Butterfly", "Chameleon", "Crab", "Dolphin", "Elephant", "Jellyfish", "Koala", "Turtle", "Whale"];

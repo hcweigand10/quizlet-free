@@ -154,7 +154,7 @@ const ManageDeck = () => {
               Update
             </Button>
           </form>
-          <ButtonDanger onClick={deleteDeckSubmit}>Delete</ButtonDanger>
+          <ButtonDanger onClick={deleteDeckSubmit}>Delete Deck</ButtonDanger>
         </div>
         <div className="col-span-1 md:col-span-2">
           <h2 className="text-xl font-bold mb-3">Cards</h2>

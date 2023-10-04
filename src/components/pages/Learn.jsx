@@ -67,7 +67,7 @@ const Learn = () => {
   };
 
   const correctAnswer = () => {
-    setStatus("correct!");
+    setStatus("Correct! " + current.answer);
     // if first time seeing, move to level 3
     if (current.level === "levelOne") {
       setLevelOne(levelOne.slice(1));
@@ -83,11 +83,10 @@ const Learn = () => {
     setRounds(rounds + 1);
     setTimeout(() => {
       setStatus("");
-    }, 1000);
+    }, 3000);
   };
 
   const wrongAnswer = () => {
-    setGuess("")
     //add to level one
     if (current.level === "levelTwo") {
       setLevelTwo(levelTwo.slice(1));
@@ -140,6 +139,7 @@ const Learn = () => {
     if (checkAnswer(fix,current?.answer)) {
       setVisible(false);
       setFix("");
+      setGuess("")
       setRounds(rounds + 1);
     } else {
       setFixStatus("Not quite... check your spelling");
@@ -224,6 +224,7 @@ const Learn = () => {
               <ButtonGray onClick={wrongAnswer}>I don't know</ButtonGray>
               <Button onClick={check} type="submit">Submit</Button>
             </form>
+            <p className="text-sm text-slate-500 mt-3">*Note- anything in parentheses is considered an alternative answer; no need to include</p>
           </div>
         </div>
       )}
