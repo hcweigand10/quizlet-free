@@ -201,7 +201,11 @@ const ManageDeck = () => {
           <Button type="submit" disabled={addCardDisabled}>
             Add
           </Button>
-          <ButtonGray type="button" onClick={() => setVisible(false)}>
+          <ButtonGray type="button" onClick={() => {
+            setAnswer("")
+            setPrompt("")
+            setVisible(false)
+          }}>
             Cancel
           </ButtonGray>
         </form>

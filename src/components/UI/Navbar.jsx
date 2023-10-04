@@ -34,7 +34,7 @@ const NavbarComp = () => {
             </>
         ) : (
           <a
-            className="mr-2 bg-primary text-white rounded px-3 py-2 font-semibold"
+            className="mr-2 md:ml-20 bg-primary text-white rounded px-3 py-2 font-semibold"
             href="/login"
           >
             Login
