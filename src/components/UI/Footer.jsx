@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import icon from "../../../public/icon.png"
+import icon from "../../assets/icon.png"
 
 const Footer = () => {
 

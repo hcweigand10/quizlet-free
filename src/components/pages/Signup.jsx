@@ -41,7 +41,9 @@ const SignUp = () => {
       const token = mutationResponse.data.addUser.token;
       auth.login(token);
     } catch (e) {
-      console.log(e);
+      setLoading(false)
+      alert("An error occured, sry :(")
+      console.error(e);
     }
   };
 

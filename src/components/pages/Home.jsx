@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { useQuery } from '@apollo/client'
 import { ALL_USERS } from '../../utils/queries'
 
 const Home = () => {
 
-  const {loading, data} = useQuery(ALL_USERS)
-  
+  const {data} = useQuery(ALL_USERS)
+
   if (data) console.log(data)
 
     return (
